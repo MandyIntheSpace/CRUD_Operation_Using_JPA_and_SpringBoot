@@ -92,11 +92,38 @@ public class CrudOperationUsingJpaAndSpringBootApplication {
 //        userRepository.deleteById(153);
 //        System.out.println("The user have been deleted");
 
-        Iterable<User> allUsers = userRepository.findAll();
-        allUsers.forEach(user -> {
-            System.out.println(user);
+//        Iterable<User> allUsers = userRepository.findAll();
+//        allUsers.forEach(user -> {
+//            System.out.println(user);
+//        });
+//        userRepository.deleteAll(allUsers);
+
+//        List<User> user = userRepository.findByNameAndCity("Mandip Timsina", "Damak");
+//        user.forEach(user1 -> {
+//            System.out.println(user1);
+//        });
+
+
+
+        //JPQL Query
+        List<User> user = userRepository.getAllUser();
+        user.forEach(user1 -> {
+            System.out.println(user1);
         });
-        userRepository.deleteAll(allUsers);
+
+        System.out.println("__________________________________");
+
+        List<User> newUser = userRepository.getUserByName("Mandip Timsina");
+        newUser.forEach(newUser1 -> {
+            System.out.println(newUser1);
+        });
+
+        System.out.println("__________________________________");
+        List<User> nUser = userRepository.getAllNewUser();
+        nUser.forEach(e -> {
+            System.out.println(e);
+        });
+
     }
 
 }
