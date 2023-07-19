@@ -7,7 +7,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import com.example.crud_operation_using_jpa_and_springboot.dao.UserRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 @SpringBootApplication
 public class CrudOperationUsingJpaAndSpringBootApplication {
@@ -17,6 +20,7 @@ public class CrudOperationUsingJpaAndSpringBootApplication {
         UserRepository userRepository = context.getBean(UserRepository.class);
 
 
+        /** SAVE SECTION
 //        User user = new User();
 //        user.setName("F1Soft Internationals");
 //        user.setCity("Lalitpur");
@@ -48,6 +52,51 @@ public class CrudOperationUsingJpaAndSpringBootApplication {
 
         System.out.println("The record of the user which are stored in the list are successfully stored in the database");
 
+         **/
+
+
+        /**
+        //UPDATE SECTION
+        Optional<User> optionalData =  userRepository.findAllById(2);
+//        optionalData.ifPresent(user-> {
+//            System.out.println(user.getName());
+//        });
+        User user = optionalData.get();
+        System.out.println(user);
+        user.setName("Nikhil Upreti");
+        userRepository.save(user);
+        System.out.println("The record of the user has been updated");
+         **/
+
+        /**
+
+        //how to get the data from the databse
+//        Iterable<User> itr = userRepository.findAll();
+//        Iterator<User> ietrator = itr.iterator();
+//        while(ietrator.hasNext()) {
+//            User user = ietrator.next();
+//            System.out.println(user);
+//        }
+
+        Iterable<User> itr = userRepository.findAll();
+        itr.forEach(new Consumer<User>() {
+            @Override
+            public void accept(User t) {
+                System.out.println(t);
+            }
+        });
+
+         **/
+
+        //DELETING THE USER ELEMENT
+//        userRepository.deleteById(153);
+//        System.out.println("The user have been deleted");
+
+        Iterable<User> allUsers = userRepository.findAll();
+        allUsers.forEach(user -> {
+            System.out.println(user);
+        });
+        userRepository.deleteAll(allUsers);
     }
 
 }
